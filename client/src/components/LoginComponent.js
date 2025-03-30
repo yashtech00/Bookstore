@@ -7,12 +7,13 @@ export const LoginComponent = () => {
      const [email, setEmail] = useState("");
       const [password, setPassword] = useState("");
     
-      const navigate = useNavigate();
+    const navigate = useNavigate();
+    const SERVER_URL = process.env.SERVER_URL;
     
       const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("/user/login",{
+            const res = await axios.post("http://localhost:8000/user/login",{
                 email,
                 password
             }) 
