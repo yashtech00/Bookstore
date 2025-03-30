@@ -1,15 +1,13 @@
-import BookModel from "../models/BooksModel"
+import BookModel from "../models/BooksModel.js"
 
 
-export const AllBooks = async (req, res) => {
+export const AllBooks = async (_, res) => {
     try {
-        const Books = await BookModel.find({
-            BookId
-        })
-        return res.status(201).status("fetch all books successfully",Books);
+        const Books = await BookModel.find();
+        return res.status(201).json({ message:"fetch all books successfully", Books });
     } catch (e) {
-        console.error("Internal server error")
-        return res.status("500")
+        console.error("Internal server error",e.message)
+        
     }
 }
 
@@ -22,8 +20,10 @@ export const AddBooks = async (req, res) => {
             BookPrice,
             BookType
         })
-        return res.status("201").json("Book add successfully",newBook);
+        return res.status(201).json({ message: "Book add successfully", newBook });
     } catch (e) {
-        return res.status("500").json("Internal server error");        
+        // return res.status(500).json("Internal server error",e.message); 
+        console.error(e.message);
+        
     }
 }
