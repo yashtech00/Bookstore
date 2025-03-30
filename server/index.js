@@ -2,8 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./models/db.js";
-
-
+import AuthRouter from "./routers/AuthRoute.js";
 
 dotenv.config();
 const app = express();
@@ -12,11 +11,8 @@ app.use(cors());
 connectDB();
 const PORT = process.env.PORT || 8000;
 
+app.use("/user", AuthRouter);
 
 app.listen(PORT, () => {
-    console.log(`server is running on ${PORT}`);
-    
-})
-
-
-
+  console.log(`server is running on ${PORT}`);
+});
